@@ -41,6 +41,7 @@ class preprocessor:
             warnings.simplefilter('always', DeprecationWarning)
             warnings.warn(message, DeprecationWarning)
             warnings.simplefilter('default', DeprecationWarning)
+
         if self.escapeChar != None:
             deprecation("'pypreprocessor.escapeChar' is deprecated. Use 'escape' instead.")
             if self.escape == '#':
@@ -63,7 +64,7 @@ class preprocessor:
                     self.resume = True
                     self.save = True
                 elif self.mode is not None:
-                    print('Unknown mode : ' + str(self.mode))
+                    print(f'Unknown mode : {str(self.mode)}')
             deprecation(msg)
 
     # reseting internal things to parse a second file
@@ -86,10 +87,7 @@ class preprocessor:
 
     # search: if define is defined
     def search_defines(self, define):
-        if define in self.defines:
-            return True
-        else:
-            return False
+        return define in self.defines
 
     #returning: validness of #ifdef #else block
     def __if(self):

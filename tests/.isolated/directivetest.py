@@ -6,7 +6,7 @@ from pypreprocessor import pypreprocessor
 
 pypreprocessor.parse()
 
-print('Testing Python ' + sys.version[:3] + ':')
+print(f'Testing Python {sys.version[:3]}:')
 
 tests = []
 
@@ -56,11 +56,7 @@ iftest += [0]
 #else
 iftest += [1]
 #endif
-if iftest == [0, 0]:
-    tests += ['#ifdef: passed']
-else:
-    tests += ['#ifdef: failed']
-
+tests += ['#ifdef: passed'] if iftest == [0, 0] else ['#ifdef: failed']
 # #else test
 elsetest = []
 #ifdef foo
@@ -78,7 +74,7 @@ if 1 in elsetest or len(elsetest) != 1:
     tests += ['#else: failed']
 else:
     tests += ['#else: passed']
-    
+
 # #nested ifdef test
 #define nested1
 #define nested2
@@ -118,15 +114,11 @@ excludetest = []
 #exclude
 excludetest += [1]
 #endexclude
-if 1 in excludetest:
-    tests += ['#exclude: failed']
-else:
-    tests += ['#exclude: passed']
-
+tests += ['#exclude: failed'] if 1 in excludetest else ['#exclude: passed']
 # print the results
 for test in tests:
     print(test)
-    
+
 # #still open #ifdefs test
 print('If there was no warning with else,else,if: Warning Test Failed')
 #ifdef car

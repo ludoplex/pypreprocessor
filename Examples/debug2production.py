@@ -24,6 +24,7 @@ This file has 3 different modes:
         Just run 'python debug2production.py postprocessed'
 '''
 
+
 import sys
 from pypreprocessor import pypreprocessor
 
@@ -52,9 +53,9 @@ print('This script is running in \'debug\' mode')
 #else
 #ifdef production
 print('This script is running in \'production\' mode')
-print('To see the output open ' + outputFile)
+print(f'To see the output open {outputFile}')
 #else
 #ifdef postprocessed
 print('This script is running in \'postprocessed\' mode')
-print('To see the output open ' + outputFile)
+print(f'To see the output open {outputFile}')
 #endifall

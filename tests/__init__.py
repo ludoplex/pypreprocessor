@@ -35,7 +35,6 @@ class RunTests(Command):
         runner = unittest.TextTestRunner(verbosity=2)
         results = runner.run(testSuite)
         sys.exit(0 if results.wasSuccessful() else 1)
-        pass
 
 def testsuite():
     suite = unittest.TestSuite()

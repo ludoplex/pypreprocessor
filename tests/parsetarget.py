@@ -1,13 +1,9 @@
 import sys
-a = 150
 from pypreprocessor import pypreprocessor
 #[pypreprocessor]#exclude
 #exclude
 sys.exit(1)
-#endexclude
-
-#ifdef printTest
-a+=50
+a = 150 + 50
 #else
 a-=50
 #endif
