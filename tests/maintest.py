@@ -41,7 +41,6 @@ class TestTemplate(object):
         pypreprocessor.save = True
         pypreprocessor.parse()
         self.assertTrue(os.path.exists(pypreprocessor.output))
-        pass
 
     def test_run_resume_nosave(self):
         pypreprocessor.run = True
@@ -49,7 +48,6 @@ class TestTemplate(object):
         pypreprocessor.save = False
         pypreprocessor.parse()
         self.assertFalse(os.path.exists(pypreprocessor.output))
-        pass
 
     def test_run_noresume_save(self):
         pypreprocessor.run = True
@@ -59,7 +57,6 @@ class TestTemplate(object):
             pypreprocessor.parse()
         self.assertEqual(e.exception.code, 0)
         self.assertTrue(os.path.exists(pypreprocessor.output))
-        pass
 
     def test_run_noresume_nosave(self):
         pypreprocessor.run = True
@@ -69,7 +66,6 @@ class TestTemplate(object):
             pypreprocessor.parse()
         self.assertEqual(e.exception.code, 0)
         self.assertFalse(os.path.exists(pypreprocessor.output))
-        pass
     
     def test_norun_resume_save(self):
         pypreprocessor.run = False
@@ -77,7 +73,6 @@ class TestTemplate(object):
         pypreprocessor.save = True
         pypreprocessor.parse()
         self.assertTrue(os.path.exists(pypreprocessor.output))
-        pass
 
     def test_norun_resume_nosave(self):
         pypreprocessor.run = False
@@ -85,7 +80,6 @@ class TestTemplate(object):
         pypreprocessor.save = False
         pypreprocessor.parse()
         self.assertFalse(os.path.exists(pypreprocessor.output))
-        pass
 
     def test_norun_noresume_save(self):
         pypreprocessor.run = False
@@ -95,7 +89,6 @@ class TestTemplate(object):
             pypreprocessor.parse()
         self.assertEqual(e.exception.code, 0)
         self.assertTrue(os.path.exists(pypreprocessor.output))
-        pass
 
     def test_norun_noresume_nosave(self):
         pypreprocessor.run = False
@@ -105,55 +98,46 @@ class TestTemplate(object):
             pypreprocessor.parse()
         self.assertEqual(e.exception.code, 0)
         self.assertFalse(os.path.exists(pypreprocessor.output))
-        pass
 
 # Parses parsetarget.py
 class FileParseTest(unittest.TestCase, TestTemplate):
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
         pypreprocessor.defines = []
         os.chdir('./tests')
-        pass
     @classmethod
-    def tearDownClass(self):
+    def tearDownClass(cls):
         os.chdir('./..')
-        pass
     def setUp(self):
         super(FileParseTest, self).setUp()
         pypreprocessor.input = './parsetarget.py'
         pypreprocessor.output = self._testMethodName
-        pass
     def tearDown(self):
         f = os.path.join(os.getcwd(), pypreprocessor.output)
         pypreprocessor.defines = []
         if(os.path.exists(f)):
             os.remove(f)
         super(FileParseTest, self).tearDown()
-        pass
     pass
 
 # Parses parsetarget.py with 'printTest' defined and captures print
 class CapturePrintTest(unittest.TestCase, TestTemplate):
     @classmethod
-    def setUpClass(self):
+    def setUpClass(cls):
         os.chdir('./tests')
-        pass
 
     @classmethod
-    def tearDownClass(self):
+    def tearDownClass(cls):
         os.chdir('./..')
-        pass
 
     def setUp(self):
         super(CapturePrintTest, self).setUp()
-        pypreprocessor.defines = []
-        pypreprocessor.defines.append('printTest')
+        pypreprocessor.defines = ['printTest']
         pypreprocessor.input = './parsetarget.py'
         pypreprocessor.output = self._testMethodName
         self.new_out, self.new_err = StringIO(), StringIO()
         self.old_out, self.old_err = sys.stdout, sys.stderr
         sys.stdout, sys.stderr = self.new_out, self.new_err
-        pass
 
     def tearDown(self):
         sys.stdout, sys.stderr = self.old_out, self.old_err
@@ -169,7 +153,6 @@ class CapturePrintTest(unittest.TestCase, TestTemplate):
         if(os.path.exists(f)):
             os.remove(f)
         super(CapturePrintTest, self).tearDown()
-        pass
     pass
 #endexclude
 
